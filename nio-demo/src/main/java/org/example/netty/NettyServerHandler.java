@@ -37,8 +37,7 @@ public class NettyServerHandler implements ChannelInboundHandler {
 
 	@Override
 	public void channelRead(ChannelHandlerContext channelHandlerContext, Object o) throws Exception {
-		ByteBuf byteBuf = (ByteBuf) o;
-		System.out.println("客户端发送过来的消息: " + byteBuf.toString(CharsetUtil.UTF_8));
+		System.out.println("客户端发送过来的消息: " + o);
 
 
 	}
