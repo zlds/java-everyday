@@ -25,7 +25,7 @@ public class NettyClientHandler implements ChannelInboundHandler {
 
 	@Override
 	public void channelActive(ChannelHandlerContext channelHandlerContext) throws Exception {
-		channelHandlerContext.writeAndFlush(Unpooled.copiedBuffer("你好，我是客户端", CharsetUtil.UTF_8));
+		channelHandlerContext.writeAndFlush("你好，我是客户端");
 	}
 
 	@Override

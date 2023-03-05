@@ -44,7 +44,7 @@ public class NettyServerHandler implements ChannelInboundHandler {
 
 	@Override
 	public void channelReadComplete(ChannelHandlerContext channelHandlerContext) throws Exception {
-		channelHandlerContext.writeAndFlush(Unpooled.copiedBuffer("哈喽，我已经收到你的消息了..", CharsetUtil.UTF_8));
+		channelHandlerContext.writeAndFlush("哈喽，我已经收到你的消息了..");
 	}
 
 	@Override

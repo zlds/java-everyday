@@ -31,6 +31,8 @@ public class NettyServerDemo {
 					protected void initChannel(SocketChannel channel) throws Exception {
 						// 添加解码器
 						channel.pipeline().addLast(new MessageDecoder());
+						// 添加编码
+						channel.pipeline().addLast(new MessageEncoder());
 						channel.pipeline().addLast(new NettyServerHandler());
 					}
 				});

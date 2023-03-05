@@ -26,6 +26,8 @@ public class NettyClient {
 					protected void initChannel(SocketChannel socketChannel) throws Exception {
 						// 添加解码器
 						socketChannel.pipeline().addLast(new MessageDecoder());
+						// 添加编码
+						socketChannel.pipeline().addLast(new MessageEncoder());
 						socketChannel.pipeline().addLast(new NettyClientHandler());
 					}
 				});
