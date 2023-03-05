@@ -24,6 +24,8 @@ public class NettyClient {
 				.handler(new ChannelInitializer<SocketChannel>() {
 					@Override
 					protected void initChannel(SocketChannel socketChannel) throws Exception {
+						// 添加解码器
+						socketChannel.pipeline().addLast(new MessageDecoder());
 						socketChannel.pipeline().addLast(new NettyClientHandler());
 					}
 				});

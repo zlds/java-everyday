@@ -29,12 +29,24 @@ public class NettyServerDemo {
 				.childHandler(new ChannelInitializer<SocketChannel>() {
 					@Override
 					protected void initChannel(SocketChannel channel) throws Exception {
+						// 添加解码器
+						channel.pipeline().addLast(new MessageDecoder());
 						channel.pipeline().addLast(new NettyServerHandler());
 					}
 				});
 
 		// 4.绑定一个端口并且同步，生成了一个ChannelFuture对象
-		ChannelFuture futuer = serverBootstrap.bind(9999).sync();
+		ChannelFuture futuer = serverBootstrap.bind(9999);
+		futuer.addListener(new ChannelFutureListener() {
+			@Override
+			public void operationComplete(ChannelFuture channelFuture) throws Exception {
+				if (channelFuture.isSuccess()) {
+					System.out.println("端口绑定成功");
+				} else {
+					System.out.println("端口绑定失败");
+				}
+			}
+		});
 		System.out.println("服务端启动成功");
 		// 5.关闭通道（并不是真正意义上关闭，而是监听关闭的状态）
 		futuer.channel().closeFuture().sync();
