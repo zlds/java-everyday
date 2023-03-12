@@ -17,3 +17,13 @@ spring:
             - Path=/oschina
           filters:
             - StripPrefix=1
+      # 服务发现
+      discovery:
+        locator:
+          enabled: true
+          # 路由的目标地址，使用服务发现的服务名
+          url-expression: "'lb://' + serviceId"
+    nacos:
+      discovery:
+        # Nacos服务地址
+        server-addr: 127.0.0.1:8848
