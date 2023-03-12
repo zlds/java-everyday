@@ -1,0 +1,19 @@
+server:
+  port: 8888
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: http-proxy
+          uri: https://www.iocoder.cn # 路由到目标地址
+          predicates:
+            - Path=/blog
+          filters:
+            - StripPrefix=1 # 去掉前缀
+        - id: oschina-proxy
+          uri: https://www.oschina.net
+          predicates:
+            - Path=/oschina
+          filters:
+            - StripPrefix=1
