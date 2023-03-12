@@ -21,5 +21,12 @@ spring:
           predicates:
             - Path=/baidu
           filters:
-            - StripPrefix=1    
+            - StripPrefix=1
+        - id: user-service
+          # 用户服务名称
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1       
 ```
