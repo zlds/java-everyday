@@ -3,26 +3,6 @@ server:
 
 spring:
   cloud:
-    gateway:
-      routes:
-        - id: http-proxy
-          uri: https://www.iocoder.cn # 路由到目标地址
-          predicates:
-            - Path=/blog
-          filters:
-            - StripPrefix=1 # 去掉前缀
-        - id: oschina-proxy
-          uri: https://www.oschina.net
-          predicates:
-            - Path=/oschina
-          filters:
-            - StripPrefix=1
-      # 服务发现
-      discovery:
-        locator:
-          enabled: true
-          # 路由的目标地址，使用服务发现的服务名
-          url-expression: "'lb://' + serviceId"
     nacos:
       discovery:
         # Nacos服务地址
