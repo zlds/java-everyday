@@ -13,13 +13,18 @@ spring:
         - id: oschina-proxy
           uri: https://www.oschina.net
           predicates:
+            # - Path=/oschina
             - Path=/oschina
+            # 设置权重分组
+            - Weight=user-service, 90
           filters:
             - StripPrefix=1
         - id: baidu-proxy
           uri: https://www.baidu.com
           predicates:
+            # - Path=/baidu
             - Path=/baidu
+            - Weight=user-service, 10
           filters:
             - StripPrefix=1
         - id: user-service
@@ -28,5 +33,9 @@ spring:
           predicates:
             - Path=/user/**
           filters:
-            - StripPrefix=1       
+            - StripPrefix=1
+      default-filters:
+        - name: Auth
+          args:
+            token-header-name: access-token         
 ```
