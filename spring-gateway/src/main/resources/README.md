@@ -34,6 +34,11 @@ spring:
             - Path=/user/**
           filters:
             - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 1 # 令牌桶的每秒存放的数量
+                redis-rate-limiter.burstCapacity: 2 # 令牌桶的最大令牌数
+                key-resolver: "#{@ipKeyResolver}"
       default-filters:
         - name: Auth
           args:
