@@ -39,6 +39,17 @@ spring:
                 redis-rate-limiter.replenishRate: 1 # 令牌桶的每秒存放的数量
                 redis-rate-limiter.burstCapacity: 2 # 令牌桶的最大令牌数
                 key-resolver: "#{@ipKeyResolver}"
+        # 
+        - id: hystrix_test
+          uri: lb://user-service
+          predicates:
+            - Path=/hystrix_test/**
+            filters:
+              - name: Hystrix
+                args:
+                  name: fallbackcmd
+                  fallbackUri: forward:/fallback
+        
       default-filters:
         - name: Auth
           args:
