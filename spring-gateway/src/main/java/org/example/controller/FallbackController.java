@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 
 
@@ -13,6 +14,7 @@ import org.springframework.web.server.ServerWebExchange;
  * @description:
  */
 
+@RestController
 public class FallbackController {
 	private Logger logger = LoggerFactory.getLogger(FallbackController.class);
 
