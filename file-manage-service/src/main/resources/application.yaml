@@ -6,9 +6,9 @@ spring:
       max-request-size: 10MB
 server:
   # 动态端口
-  port: ${random.int(10000,19999)}
+  port: 10040
 
 
 
 #  文件上传路径
-fileURL: /data/file
+fileURL: /data/file/
