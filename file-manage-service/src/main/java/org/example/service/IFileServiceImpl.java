@@ -1,14 +1,26 @@
 package org.example.service;
 
+import cn.hutool.core.util.IdUtil;
+import org.example.dao.WorkFileInfoMapper;
 import org.example.dto.FileCreateReqDTO;
+import org.example.model.WorkFileInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -20,6 +32,15 @@ import java.util.UUID;
 @Service
 public class IFileServiceImpl implements IFileService {
 
+	@Autowired
+	private WorkFileInfoMapper workFileInfoMapper;
+
+	/**
+	 * 运行上传文件后缀列表
+	 */
+	private static final String[] ALLOW_EXTENSIONS = new String[]{".jpg", ".png", ".txt", ".doc", ".docx", ".xls",
+			".xlsx", ".ppt", ".pptx", ".pdf"};
+
 	@Value("${fileURL}")
 	private String fileURL;
 	@Override
@@ -27,8 +48,13 @@ public class IFileServiceImpl implements IFileService {
 		// 获取文件名称
 		String originalFilename = file.getOriginalFilename();
 		// 获取文件后缀,拼接路径生成新的文件名
-		String suffixString = originalFilename.substring(originalFilename.lastIndexOf("."));
-		String filePath = fileURL + UUID.randomUUID().toString().replace("-","") + suffixString;
+		String fileSuffix = originalFilename.substring(originalFilename.lastIndexOf("."));
+		// 判断文件后缀是否合法
+		if (!isAllow(fileSuffix.toLowerCase())) {
+			return "不支持该文件类型";
+		}
+		String filePath = fileURL + UUID.randomUUID().toString().replace("-","") +
+				fileSuffix;
 		File dest = new File(filePath);
 		try {
 			Files.copy(file.getInputStream(), dest.toPath());
@@ -42,7 +68,40 @@ public class IFileServiceImpl implements IFileService {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+	}
 
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public Object uploadMultiple(MultipartFile[] multipartFiles) {
+		Map<String, String> map = new HashMap<>();
+		for (MultipartFile multipartFile : multipartFiles) {
+			String fileName = multipartFile.getOriginalFilename();
+			String fileSuffix = fileName.substring(fileName.lastIndexOf("."));
+			String newFileName = UUID.randomUUID().toString().replace("-","") + fileSuffix;
+			try {
+				multipartFile.transferTo(new File(fileURL + newFileName));
+				// 入库
+				WorkFileInfo workFileInfo = new WorkFileInfo();
+				workFileInfo.setId(IdUtil.getSnowflake(1,1).nextId());
+				workFileInfo.setFileName(fileName);
+				workFileInfo.setFileRealName(newFileName);
+				workFileInfo.setUserId(IdUtil.getSnowflake(1,1).nextId());
+				workFileInfo.setHostName(InetAddress.getLocalHost().getHostName());
+				workFileInfoMapper.insert(workFileInfo);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			map.put(fileName,newFileName);
+		}
+		return map;
+	}
 
+	private boolean isAllow(String fileSuffix) {
+		for (String allowExtension : ALLOW_EXTENSIONS) {
+			if (allowExtension.equals(fileSuffix)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
