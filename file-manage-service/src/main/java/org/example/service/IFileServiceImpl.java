@@ -1,6 +1,7 @@
 package org.example.service;
 
 import cn.hutool.core.util.IdUtil;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.example.dao.WorkFileInfoMapper;
 import org.example.dto.FileCreateReqDTO;
 import org.example.model.WorkFileInfo;
@@ -13,15 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author: hanchaowei
@@ -30,7 +24,7 @@ import java.util.UUID;
  */
 
 @Service
-public class IFileServiceImpl implements IFileService {
+public class IFileServiceImpl extends ServiceImpl<WorkFileInfoMapper,WorkFileInfo> implements IFileService {
 
 	@Autowired
 	private WorkFileInfoMapper workFileInfoMapper;
@@ -74,6 +68,7 @@ public class IFileServiceImpl implements IFileService {
 	@Transactional(rollbackFor = Exception.class)
 	public Object uploadMultiple(MultipartFile[] multipartFiles) {
 		Map<String, String> map = new HashMap<>();
+		List<WorkFileInfo> workFileInfoList = new ArrayList<>();
 		for (MultipartFile multipartFile : multipartFiles) {
 			String fileName = multipartFile.getOriginalFilename();
 			String fileSuffix = fileName.substring(fileName.lastIndexOf("."));
@@ -87,12 +82,13 @@ public class IFileServiceImpl implements IFileService {
 				workFileInfo.setFileRealName(newFileName);
 				workFileInfo.setUserId(IdUtil.getSnowflake(1,1).nextId());
 				workFileInfo.setHostName(InetAddress.getLocalHost().getHostName());
-				workFileInfoMapper.insert(workFileInfo);
+				workFileInfoList.add(workFileInfo);
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
 			map.put(fileName,newFileName);
 		}
+		this.saveBatch(workFileInfoList);
 		return map;
 	}
 

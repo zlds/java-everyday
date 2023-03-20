@@ -1,5 +1,7 @@
 package org.example.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
+import org.example.model.WorkFileInfo;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.net.UnknownHostException;
@@ -10,19 +12,19 @@ import java.net.UnknownHostException;
  * @description:
  */
 
-public interface IFileService {
+public interface IFileService extends IService<WorkFileInfo> {
 
 	/**
 	 * 单个文件上传
 	 * @param file
 	 * @return
 	 */
-	public String upload(MultipartFile file);
+	String upload(MultipartFile file);
 
 	/**
 	 * 多个文件上传
 	 * @param multipartFiles
 	 * @return
 	 */
-	public Object uploadMultiple(MultipartFile[] multipartFiles);
+	Object uploadMultiple(MultipartFile[] multipartFiles);
 }
