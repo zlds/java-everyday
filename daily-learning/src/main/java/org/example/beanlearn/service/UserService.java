@@ -14,6 +14,15 @@ public class UserService {
 	@Autowired
 	UserInfoService userInfoService;
 
+	/**
+	 * 不通过Autowired注解，通过构造方法注入
+	 */
+//	UserInfoService userInfoService;
+//
+//	public UserService(UserInfoService userInfoService) {
+//		this.userInfoService = userInfoService;
+//	}
+
 	public void test() {
 		System.out.println(userInfoService);
 	}
