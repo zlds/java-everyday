@@ -40,7 +40,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 				.and()
 				.authorizeRequests()
-				.antMatchers("/user/**").authenticated()
-				.anyRequest().permitAll();
+				//  放行URL
+				.antMatchers("/check/**").anonymous()
+				// 其他拦截
+				.anyRequest().authenticated();
 	}
 }

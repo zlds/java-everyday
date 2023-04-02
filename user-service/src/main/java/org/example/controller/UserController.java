@@ -1,4 +1,4 @@
-package org.example;
+package org.example.controller;
 
 import org.example.dto.UserAddDTO;
 import org.example.dto.UserDTO;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
-public class Controller {
+public class UserController {
 	/**
 	 * 通过id获取用户
 	 * @param id
