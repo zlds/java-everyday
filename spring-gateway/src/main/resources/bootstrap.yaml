@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: gateway-service
+    name: gateway-server
   cloud:
     nacos:
       config:
@@ -14,5 +14,5 @@ spring:
         # Nacos配置文件的分组,默认为DEFAULT_GROUP
         group: DEFAULT_GROUP
         # Nacos中对应的dataId,默认为spring.application.name
-        name: gateway-service
+        name: gateway-server
         file-extension: yaml

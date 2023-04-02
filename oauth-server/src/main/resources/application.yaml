@@ -1,11 +1,11 @@
 spring:
   application:
     # 应用名称
-    name: user-server
+    name: oauth-server
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
 server:
   # 动态端口
-  port: ${random.int(10000,19999)}
+  port: 10010
