@@ -31,12 +31,12 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 	/**
 	 * 客户端id
 	 */
-	private static final String CLIENT_ID = "user-service";
+	private static final String CLIENT_ID = "user-server";
 
 	/**
 	 * 客户端秘钥
 	 */
-	private static final String SECRET_CHAR_SEQUENCE = "{noop}secret";
+	private static final String SECRET_CHAR_SEQUENCE = "xyz";
 	private static final String ALL = "all";
 
 	/**

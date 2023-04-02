@@ -8,4 +8,13 @@
 6、验证通过生成token返回给客户端
 
 演示地址:
-    http://localhost:10010/oauth/authorize?response_type=code&client_id=user-service
+http://localhost:10010/oauth/authorize?response_type=code&client_id=user-service&redirect_uri=https://www.baidu.com
+
+# 获取token
+http://localhost:10010/oauth/token?client_id=user-service&client_secret=xyz&grant_type=password&username=admin&password=123456
+
+# 验证token是否过期
+http://localhost:10010/oauth/check_token?token=xxx
+
+# 刷新token
+http://localhost:10010/oauth/token?client_id=user-service&client_secret=xyz&grant_type=refresh_token&refresh_token=xxx
