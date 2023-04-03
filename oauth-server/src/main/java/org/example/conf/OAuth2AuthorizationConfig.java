@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.jwt.crypto.sign.MacSigner;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -11,7 +12,10 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 
 /**
@@ -100,7 +104,9 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 		super.configure(endpoints);
 		endpoints
 				// token存储方法。TODO 暂时存放到内存中
-				.tokenStore(new InMemoryTokenStore())
+//				.tokenStore(new InMemoryTokenStore())
+				// JWT认证
+				.tokenStore(tokenStore())
 				// token服务器
 				.tokenServices(authorizationServerTokenServices())
 				.authenticationManager(authenticationManager)
@@ -113,10 +119,32 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 		DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
 		// 开启刷新令牌
 		defaultTokenServices.setSupportRefreshToken(true);
-		defaultTokenServices.setTokenStore(new InMemoryTokenStore());
+
+		// JWT设置
+		defaultTokenServices.setTokenEnhancer(jwtAccessTokenConverter());
+		// 注释内存存储
+//		defaultTokenServices.setTokenStore(new InMemoryTokenStore());
+		defaultTokenServices.setTokenStore(tokenStore());
 		// 设置令牌有效时间
 		defaultTokenServices.setAccessTokenValiditySeconds(20);
 		defaultTokenServices.setRefreshTokenValiditySeconds(259200);
 		return defaultTokenServices;
 	}
+
+
+	public TokenStore tokenStore() {
+		return new JwtTokenStore(jwtAccessTokenConverter());
+	}
+
+	/**
+	 * JWT Token转换器
+	 * @return
+	 */
+	public JwtAccessTokenConverter jwtAccessTokenConverter() {
+		JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
+		jwtAccessTokenConverter.setSigningKey("oauth2");
+		jwtAccessTokenConverter.setVerifier(new MacSigner("oauth2"));
+		return jwtAccessTokenConverter;
+	}
+
 }
