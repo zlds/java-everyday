@@ -7,5 +7,4 @@ spring:
       discovery:
         server-addr: 127.0.0.1:8848
 server:
-  # 动态端口
   port: 10020

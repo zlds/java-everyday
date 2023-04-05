@@ -1,6 +1,7 @@
 package org.example.conf;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,12 +11,15 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+
+import javax.sql.DataSource;
 
 
 /**
@@ -31,6 +35,8 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
+	@Autowired
+	private DataSource dataSource;
 
 	/**
 	 * 客户端id
@@ -88,7 +94,8 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		super.configure(clients);
-		clients.inMemory()
+		// 内存存储
+		/*clients.inMemory()
 				.withClient(CLIENT_ID)
 				.secret(SECRET_CHAR_SEQUENCE)
 				.autoApprove(false)
@@ -96,7 +103,9 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 				.scopes(ALL)
 				.accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS)
 				// 授权成功后跳转地址,如果前端传了redirect_uri不在列表中将会报错
-				.redirectUris("https://www.baidu.com","https://www.qq.com");
+				.redirectUris("https://www.baidu.com","https://www.qq.com");*/
+		// 数据库加载认证信息
+		clients.withClientDetails(jdbcClientDetailsService());
 	}
 
 	@Override
@@ -147,4 +156,12 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 		return jwtAccessTokenConverter;
 	}
 
+	/**
+	 * 数据库中获取客户端id
+	 */
+	@Bean
+	public JdbcClientDetailsService jdbcClientDetailsService() {
+		return new JdbcClientDetailsService(dataSource);
+
+	}
 }
