@@ -12,8 +12,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @description: 通过ReadLock和WriteLock实现线程安全的HashMap
  */
 
-public class SafeHashMap<K,V> {
-	private final Map<K,V> map;
+public class SafeHashMap<K, V> {
+	private final Map<K, V> map;
 	private final ReadWriteLock lock;
 
 	private final Lock readLock;
@@ -36,7 +36,7 @@ public class SafeHashMap<K,V> {
 		}
 	}
 
-	public V put(K key,V value) {
+	public V put(K key, V value) {
 		writeLock.lock();
 		try {
 			return map.put(key, value);
@@ -71,19 +71,4 @@ public class SafeHashMap<K,V> {
 			writeLock.unlock();
 		}
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

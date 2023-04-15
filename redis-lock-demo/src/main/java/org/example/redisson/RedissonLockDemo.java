@@ -25,12 +25,12 @@ public class RedissonLockDemo {
 	}
 
 	public void LockTime(String lockName) {
-		// 获取当前值
-		RAtomicLong atomicLong = redissonClient.getAtomicLong("regionId_" + lockName);
 		// 获取锁
 		RLock lock = redissonClient.getLock(lockName);
 		try {
 			lock.lock();
+			// 获取当前值
+			RAtomicLong atomicLong = redissonClient.getAtomicLong("regionId_" + lockName);
 			System.out.println("成功获取锁，当前的值是: " + atomicLong.get());
 			// 执行业务操作
 			TimeUnit.SECONDS.sleep(1);
