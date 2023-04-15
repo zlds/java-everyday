@@ -22,9 +22,11 @@ public class BinaryTree {
 	}
 
 	public static TreeNode insert(TreeNode node,int value) {
+		// 判断节点是否为null，为null说明是新值，生成一课新的节点
 		if (node == null) {
 			return new TreeNode(value);
 		}
+		// 判断当前节点是否小于当前节点的值，说明新值应该插入当前节点的左子树。否则就是右子树
 		if (value < node.value) {
 			node.left = insert(node.left, value);
 		} else if (value > node.value) {
