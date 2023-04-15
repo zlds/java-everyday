@@ -21,6 +21,17 @@ public class BinaryTree {
 		}
 	}
 
+	public static TreeNode insert(TreeNode node,int value) {
+		if (node == null) {
+			return new TreeNode(value);
+		}
+		if (value < node.value) {
+			node.left = insert(node.left, value);
+		} else if (value > node.value) {
+			node.right = insert(node.right, value);
+		}
+		return node;
+	}
 	/**
 	 * 前序遍历
 	 * @param node
