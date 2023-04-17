@@ -26,7 +26,7 @@ public class CustomCertificateLoadConfig {
 	public void init() {
 		try {
 			// 证书路径
-			Resource resource = new ClassPathResource("anylogic/certificate/anylogic.pem");
+			Resource resource = new ClassPathResource("cert/mycertfile.pem");
 			InputStream inputStream = resource.getInputStream();
 
 			CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
