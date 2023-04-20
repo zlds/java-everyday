@@ -21,7 +21,4 @@ public class AutoLoggingInvocationHandler {
 		System.out.println("====方法请求后记录到db中====");
 		return result;
 	}
-
-
-
 }
