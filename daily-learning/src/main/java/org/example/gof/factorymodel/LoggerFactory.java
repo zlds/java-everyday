@@ -1,0 +1,22 @@
+package org.example.gof.factorymodel;
+
+/**
+ * @author: hanchaowei
+ * @date 2023/4/23
+ * @description: 工厂接口
+ */
+
+public abstract class LoggerFactory {
+
+	public abstract Logger createLogger();
+
+	public static LoggerFactory getFactory(String type) {
+		if ("file".equals(type)) {
+			return new FileLoggerFactory();
+		}
+		if ("database".equals(type)) {
+			return new DatabaseLoggerFactory();
+		}
+		throw new IllegalArgumentException("Invalid logger type: " + type);
+	}
+}
