@@ -10,6 +10,11 @@ public abstract class LoggerFactory {
 
 	public abstract Logger createLogger();
 
+	/**
+	 * 静态工厂方法。根据客户端参数创建不同的工厂实例。
+	 * @param type
+	 * @return
+	 */
 	public static LoggerFactory getFactory(String type) {
 		if ("file".equals(type)) {
 			return new FileLoggerFactory();
