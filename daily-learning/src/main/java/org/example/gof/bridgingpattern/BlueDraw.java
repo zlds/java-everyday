@@ -1,4 +1,4 @@
-package org.example.gof.bridgingpattern.geektime;
+package org.example.gof.bridgingpattern;
 
 /**
  * @author: hanchaowei
