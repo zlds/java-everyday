@@ -16,5 +16,12 @@ public class IUserControllerTest {
 		 */
 		IUserController userControllerProxy = new UserControllerProxy(new UserController());
 		userControllerProxy.login("123", "123");
+
+		/**
+		 * 假设我们有一个外部类，UserController，现在我们要扩展UserController，可以让代理类继承UserController，
+		 * 实现扩展功能。
+		 */
+		UserControllerProxyExtend userControllerProxyExtend = new UserControllerProxyExtend();
+		userControllerProxyExtend.login("123", "123");
 	}
 }
