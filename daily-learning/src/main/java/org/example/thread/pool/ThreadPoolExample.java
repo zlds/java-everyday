@@ -24,6 +24,7 @@ public class ThreadPoolExample {
 		try {
 			// 获取任务返回结果，如果任务未完成则一直阻塞
 			String result = future.get();
+			System.out.println("任务执行结果: " + result);
 		} catch (InterruptedException | ExecutionException e) {
 			throw new RuntimeException(e);
 		} finally {

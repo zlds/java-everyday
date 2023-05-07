@@ -5,7 +5,7 @@ import java.util.concurrent.Callable;
 /**
  * @author: hanchaowei
  * @date 2023/5/7
- * @description:
+ * @description: Callable可以有返回值
  */
 
 public class MyCallableTask implements Callable<String> {
