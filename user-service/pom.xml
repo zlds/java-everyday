@@ -62,6 +62,12 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
             <version>${nacos.version}</version>
         </dependency>
+        <!-- 将配置信息存放到nacos中,Nacos作为配置中心,并实现对其的自动配置 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+            <version>${nacos.version}</version>
+        </dependency>
 
         <!-- 引入Spring Cloud Security OAuth2 依赖 -->
         <dependency>
@@ -74,7 +80,7 @@
             <artifactId>spring-cloud-starter-oauth2</artifactId>
             <version>2.2.5.RELEASE</version>
         </dependency>
-        <!-- Job 定时任务相关 -->
+        <!-- 分布式定时任务 -->
         <dependency>
             <groupId>com.xuxueli</groupId>
             <artifactId>xxl-job-core</artifactId>
