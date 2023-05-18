@@ -2,7 +2,6 @@ package org.example.conf;
 
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
  * @description:
  */
 @Configuration
-@RefreshScope
 public class XxlJobConfig {
 	@Value("${xxl.job.admin.addresses}")
 	private String adminAddresses;
