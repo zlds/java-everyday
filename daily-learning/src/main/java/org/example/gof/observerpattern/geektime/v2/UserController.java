@@ -7,16 +7,11 @@ import java.util.List;
  * @author: hanchaowei
  * @date 2023/5/3
  * @description:
+ * v2模式中通过观察者模式，将注册成功后的逻辑抽离出来，放到观察者中，降低了耦合性。
+ * 后续只需要将新增放到观察者中即可。
  */
 
 public class UserController {
-
-	/**
-	 * v2模式中通过观察者模式，将注册成功后的逻辑抽离出来，放到观察者中，降低了耦合性。后续只需要将新增放到观察者中即可。
-	 */
-
-
-
 
 	private UserService userService;
 
@@ -33,6 +28,29 @@ public class UserController {
 		for (RegObserver regObserver : observerList) {
 			regObserver.handleRegSuccess(userId);
 		}
+
+		// 异步非阻塞
+		for (RegObserver regObserver : observerList) {
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					regObserver.handleRegSuccess(userId);
+				}
+			}).start();
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	}
 }
