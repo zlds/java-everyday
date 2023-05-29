@@ -3,7 +3,7 @@ package org.example.gof.strategypattern;
 /**
  * @author: hanchaowei
  * @date 2023/5/20
- * @description:
+ * @description: 购物车
  */
 
 public class ShoppingCart {

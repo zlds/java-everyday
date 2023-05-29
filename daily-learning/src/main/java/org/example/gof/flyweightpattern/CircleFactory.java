@@ -14,8 +14,6 @@ public class CircleFactory {
 	 * 存储已经创建的对象,当调用getCircle方法被调用时,它会检查circleMap中是否已经有一个颜色为color的圆形,如果有则直接返回
 	 * ,如果没有则创建一个并放入map中.
 	 */
-	//
-	//
 	private static final Map<String,Circle> circleMap = new HashMap<>();
 
 	public static Circle getCircle(String color) {
