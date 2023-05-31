@@ -86,6 +86,14 @@
             <artifactId>aspectjweaver</artifactId>
             <version>1.9.6</version>
         </dependency>
+
+        <!--XSS过滤-->
+        <dependency>
+            <groupId>org.owasp.encoder</groupId>
+            <artifactId>encoder</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
     </dependencies>
 
 </project>
