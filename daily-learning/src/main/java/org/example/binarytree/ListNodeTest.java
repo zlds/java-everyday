@@ -103,6 +103,32 @@ public class ListNodeTest {
 
 	}
 
+	/**
+	 * 查找中间值
+	 * @param head
+	 * @return
+	 * 快慢指针也被称为"龟兔赛跑",慢指针每次移动一个节点，快指针每次移动两个节点，当快指针到达两边的尾部时，慢指针刚好到达中间节点。
+	 * 1->2->3->4->5;
+	 * 第一次循环：slow=2,fast=4;
+	 * 第二次循环：slow=3,fast=5;
+	 * 第三次循环：slow=4,fast=null;
+	 * 循环条件终止，返回slow。
+	 */
+	public static ListNode findMiddle(ListNode head) {
+		// 创建慢指针，每次移动一个节点
+		ListNode slow = head;
+		// 创建快指针，每次移动两个节点
+		ListNode fast = head;
+
+		while (fast != null && fast.next != null) {
+			// 慢指针移动一个节点
+			slow = slow.next;
+			// 快指针移动两个节点
+			fast = fast.next.next;
+		}
+
+		return slow;
+	}
 
 	public static void main(String[] args) {
 		// 创建链表 1->2->3->4->5
@@ -115,7 +141,7 @@ public class ListNodeTest {
 		printList(head);
 
 		// 使用数组创建链表
-		System.out.println("==============");
+		System.out.println("======= 使用数组创建链表 =======");
 		int[] ints = {5,4,3,2,1};
 		ListNode list = createList(ints);
 		printList(list);
@@ -132,7 +158,15 @@ public class ListNodeTest {
 		System.out.println("======= 在指定位置删除测试 =======");
 		int[] arrDelete = {1,2,3,4,5};
 		ListNode deleteListNode = createList(arrDelete);
-		ListNode deleteResult = deleteAt(deleteListNode, 2);
+		ListNode deleteResult = deleteAt(deleteListNode, 4);
 		printList(deleteResult);
+
+		// 中间值查找
+		System.out.println("======= 中间值查找 =======");
+		int[] arrFind = {1,2,3,4,5};
+		ListNode findListNode = createList(arrFind);
+		ListNode middle = findMiddle(findListNode);
+		System.out.println(middle.val);
+
 	}
 }
