@@ -1,4 +1,4 @@
-package org.example.binarytree;
+package org.example.leetcode;
 
 import java.util.PriorityQueue;
 

@@ -1,4 +1,4 @@
-package org.example.binarytree;
+package org.example.leetcode;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -24,11 +24,11 @@ public class StringIsValid {
 			// 如果是左括号压入栈中。如果是右括号先检查栈是否为空，并查看栈顶的元素是不是对应的开括号，如果是弹出
 			if (c == '(' || c == '[' || c == '{') {
 				stack.push(c);
-			} else if (c == ')' && !stack.isEmpty() || stack.peek() == ')') {
+			} else if (c == ')' && !stack.isEmpty() || stack.peek() == '(') {
 				stack.pop();
-			} else if (c == ']' && !stack.isEmpty() || stack.peek() == ']') {
+			} else if (c == ']' && !stack.isEmpty() || stack.peek() == '(') {
 				stack.pop();
-			} else if (c == '}' && !stack.isEmpty() || stack.peek() == '}') {
+			} else if (c == '}' && !stack.isEmpty() || stack.peek() == '{') {
 				stack.pop();
 			} else {
 				return false;
