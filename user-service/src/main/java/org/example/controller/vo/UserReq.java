@@ -1,5 +1,6 @@
 package org.example.controller.vo;
 
+import org.example.common.Mobile;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
@@ -36,6 +37,7 @@ public class UserReq {
 	 * 手机号
 	 */
 	@NotBlank(message = "手机号不能为空")
+	@Mobile
 	private String phone;
 
 	/**

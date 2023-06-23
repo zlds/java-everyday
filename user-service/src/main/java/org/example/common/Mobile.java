@@ -1,10 +1,30 @@
 package org.example.common;
 
+import javax.validation.Constraint;
+import javax.validation.Payload;
+import java.lang.annotation.*;
+
 /**
  * @author: hanchaowei
  * @date 2023/6/22
- * @description:
+ * @description: 手机号校验注解
  */
 
-public class Mobile {
+@Target({
+		ElementType.METHOD,
+		ElementType.FIELD,
+		ElementType.ANNOTATION_TYPE,
+		ElementType.CONSTRUCTOR
+
+})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Constraint(validatedBy = MobileValidator.class)
+public @interface Mobile {
+
+	String message() default "手机号格式不正确";
+
+	Class<?>[] groups() default {};
+
+	Class<? extends Payload>[] payload() default {};
 }
