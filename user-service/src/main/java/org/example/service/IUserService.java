@@ -16,4 +16,11 @@ public interface IUserService {
 	 */
 	void add(UserReq req);
 
+	/**
+	 * 判断手机号是否被注册
+	 * @param mobile
+	 * @return
+	 */
+	boolean isRegistered(String mobile);
+
 }

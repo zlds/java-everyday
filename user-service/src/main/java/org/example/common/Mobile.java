@@ -10,15 +10,8 @@ import java.lang.annotation.*;
  * @description: 手机号校验注解
  */
 
-@Target({
-		ElementType.METHOD,
-		ElementType.FIELD,
-		ElementType.ANNOTATION_TYPE,
-		ElementType.CONSTRUCTOR
-
-})
+@Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Documented
 @Constraint(validatedBy = MobileValidator.class)
 public @interface Mobile {
 
