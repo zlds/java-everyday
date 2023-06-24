@@ -1,5 +1,6 @@
 package org.example.controller.vo;
 
+import lombok.Data;
 import org.example.common.Mobile;
 import org.hibernate.validator.constraints.Length;
 
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotEmpty;
  * @description:
  */
 
+@Data
 public class UserReq {
 
 	/**
