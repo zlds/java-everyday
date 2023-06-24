@@ -37,10 +37,12 @@ public class DivideAndConquer {
 
 	// 计算x的n次方
 
-	public static int pow(int x, int n) {
-		int result = 1;
+	public static double pow(int x, int n) {
+		double result = 1.0;
+		int absN = Math.abs(n);
 
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < absN; i++) {
+			// 每次循环乘以x
 			result *= x;
 		}
 		return n < 0 ? 1 / result: result;
