@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.controller.vo.UserReq;
+import org.example.dal.dao.SysUserMapper;
 import org.example.dal.model.SysUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,12 @@ public class IUserServiceImpl implements IUserService {
 
 	private  ModelMapper modelMapper;
 
+	private SysUserMapper sysUserMapper;
+
 	@Override
 	public void add(UserReq req) {
+		SysUser user = modelMapper.map(req, SysUser.class);
+		sysUserMapper.insert(user);
 	}
 
 	@Override
