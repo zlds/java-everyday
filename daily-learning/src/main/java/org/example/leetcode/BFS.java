@@ -51,6 +51,31 @@ public class BFS {
 		return levels;
 	}
 
+	public static List<List<Integer>> levelOrderBFS(TreeNode root) {
+		List<List<Integer>> res = new ArrayList<>();
+		if (root == null) {
+			return res;
+		}
+		helper(root, 0,res);
+		return  res;
+	}
+
+	public static void helper(TreeNode root,int level,List<List<Integer>> res) {
+		// 处理当前层
+		if (res.size() == level) {
+			res.add(new ArrayList<>());
+		}
+		// 将当前节点的值添加到当前层的列表中
+		res.get(level).add(root.val);
+
+		// 处理子节点
+		if (root.left != null) {
+			helper(root.left,level + 1,res);
+		}
+		if (root.right != null) {
+			helper(root.right,level + 1,res);
+		}
+	}
 
 	public static void main(String[] args) {
 		TreeNode root = new TreeNode(1);
@@ -61,8 +86,10 @@ public class BFS {
 		root.right.left = new TreeNode(6);
 		root.right.right = new TreeNode(7);
 
-		List<List<Integer>> lists = levelOrder(root);
-		System.out.println(lists);
+
+		System.out.println("广度优先队列实现：" + levelOrder(root));
+
+		System.out.println("广度优先递归实现：" + levelOrderBFS(root));
 	}
 
 }
