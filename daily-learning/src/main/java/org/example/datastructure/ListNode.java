@@ -115,16 +115,4 @@ public class ListNode {
 		System.out.println("检查6是否存在" + listNode.search(6));
 
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 }
