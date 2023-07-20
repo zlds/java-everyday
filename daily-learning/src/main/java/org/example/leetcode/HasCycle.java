@@ -27,7 +27,7 @@ public class HasCycle {
 
 
 	public static Boolean hasCycleSet(ListNode head) {
-		// 创建有个set集合，存放遍历过的节点
+		// 创建一个set集合，存放遍历过的节点
 		Set<ListNode> nodeSet = new HashSet<>();
 
 		// 遍历节点，如果节点出现在集合中返回ture；否则将节点添加到集合中
