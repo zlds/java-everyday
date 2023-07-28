@@ -29,5 +29,18 @@ public class PriorityQueueTest {
 		// 再次查看队首元素
 		System.out.println(priorityQueue.peek());
 
+
+		// 定时任务优先级队列测试
+		PriorityQueue<Task> taskQueue = new PriorityQueue<>();
+		taskQueue.add(new Task("高优先级",3));
+		taskQueue.add(new Task("低优先级",1));
+		taskQueue.add(new Task("中优先级",2));
+
+		while (!taskQueue.isEmpty()) {
+			// 获取头元素
+			Task netTask = taskQueue.poll();
+			System.out.println("处理任务" + netTask);
+		}
+
 	}
 }
