@@ -6,14 +6,14 @@
 
     <groupId>org.example</groupId>
     <artifactId>base-dependencies</artifactId>
-    <version>${version}</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
     <description>基础bom文件,管理整个项目的依赖版本</description>
 
     <properties>
-        <revision>1.6.2-snapshot</revision>
+        <revision>1.0.0</revision>
         <!-- 统一依赖管理 -->
         <spring.boot.version>2.2.4.RELEASE</spring.boot.version>
         <spring.cloud.version>Hoxton.SR1</spring.cloud.version>
@@ -39,6 +39,8 @@
         <nacos.version>2.2.5.RELEASE</nacos.version>
         <!-- 定时任务 -->
         <xxl-job.version>2.3.1</xxl-job.version>
+        <!-- 工具类 -->
+        <modelmapper.version>2.3.3</modelmapper.version>
 
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
@@ -144,6 +146,13 @@
                 <artifactId>spring-boot-starter-data-redis</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>${modelmapper.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
