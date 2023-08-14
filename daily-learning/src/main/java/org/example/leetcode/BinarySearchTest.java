@@ -26,7 +26,7 @@ public class BinarySearchTest {
 				left = mid + 1;
 			} else {
 				// target在左边
-				right = right + 1;
+				right = right - 1;
 			}
 		}
 		return -1;
