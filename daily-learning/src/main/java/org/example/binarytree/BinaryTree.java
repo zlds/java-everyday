@@ -1,5 +1,9 @@
 package org.example.binarytree;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 /**
  * @author: hanchaowei
  * @date 2023/4/13
@@ -47,6 +51,8 @@ public class BinaryTree {
 		preorderTraversal(node.right);
 	}
 
+	// 中序遍历
+
 	public static void inorderTraversal(TreeNode node) {
 		if (node == null) {
 			return;
@@ -69,6 +75,33 @@ public class BinaryTree {
 		System.out.println(node.value + " ");
 	}
 
+
+	// 迭代
+	public static List<Integer> preorderTraversalIterative(TreeNode root) {
+		List<Integer> result = new ArrayList<>();
+		if (root == null) {
+			return result;
+		}
+
+		// 新建栈
+		Stack<TreeNode> stack = new Stack<>();
+		stack.push(root);
+
+		while (!stack.isEmpty()) {
+			TreeNode curr = stack.pop();
+			result.add(curr.value);
+			// 先将右子树入栈,然后是左子树,当从栈中弹出时,左子树会先被处理。(栈是先如后出的)
+
+			if (curr.right != null) {
+				stack.push(curr.right);
+			}
+			if (curr.left != null) {
+				stack.push(curr.left);
+			}
+		}
+		return result;
+	}
+
 	public static void main(String[] args) {
 		TreeNode root = new TreeNode(1);
 		root.left = new TreeNode(2);
@@ -82,5 +115,9 @@ public class BinaryTree {
 		inorderTraversal(root);
 		System.out.println("后续遍历");
 		postorderTraversal(root);
+
+
+		List<Integer> integers = preorderTraversalIterative(root);
+		System.out.println(integers);
 	}
 }
