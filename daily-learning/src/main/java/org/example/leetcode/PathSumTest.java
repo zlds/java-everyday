@@ -38,7 +38,7 @@ public class PathSumTest {
 			TreeNode currentNode = nodeStack.pop();
 			// 取出节点路径值
 			List<Integer> currentPath = new ArrayList<>(pathStack.pop());
-			// 如果是子节点，判断路径值是否等于targetSum
+			// 如果是叶子节点，判断路径值是否等于targetSum
 			if (currentNode.left == null && currentNode.right == null) {
 				int sum = 0;
 				for (int num: currentPath) {
