@@ -7,7 +7,7 @@ import java.util.Queue;
 /**
  * @author: hanchaowei
  * @date 2023/8/21
- * @description:
+ * @description: 序列化二叉树
  */
 
 public class SerializeTreeNode {

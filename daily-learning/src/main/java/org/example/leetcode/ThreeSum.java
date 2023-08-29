@@ -20,7 +20,7 @@ public class ThreeSum {
 
 		// 对数组进行排序
 		Arrays.sort(nums);
-		// 由于是3数之后，所以使用-2。
+		// 由于是3数之和，所以使用-2。
 		for (int i = 0; i < nums.length - 2; i++) {
 			// 跳过重复值。nums[i] == nums[i - 1] 是将当前值与上一个值进行对比，如果一样跳过.
 			if (i > 0 && nums[i] == nums[i - 1]) {
