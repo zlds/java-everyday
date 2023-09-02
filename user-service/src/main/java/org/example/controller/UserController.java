@@ -34,6 +34,7 @@ public class UserController {
 	 */
 	@GetMapping("/add")
 	public Integer add(UserAddDTO addDTO) {
+
 		return (int) (System.currentTimeMillis() / 1000);
 	}
 
