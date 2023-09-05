@@ -1,5 +1,8 @@
 package org.example.leetcode;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * @author: hanchaowei
  * @date 2023/8/31
@@ -80,27 +83,57 @@ public class RecursionExample {
 		hanoi(n - 1, aux, from, to);
 	}
 
+	/**
+	 * 二叉树的最大深度
+	 * @param node
+	 * @return
+	 */
+	public int depthTreeNode(TreeNode node) {
+		if (node == null) {
+			return 0;
+		}
+		// 左子树的深度
+		int leftDepth = depthTreeNode(node.left);
+		// 右子树的深度
+		int rightDepth = depthTreeNode(node.right);
+		// 返回左右子树中的最大值 + 1
+		return Math.max(leftDepth,rightDepth) + 1;
+	}
+
+	/**
+	 * 二叉树的最大深度
+	 * @param node
+	 * @return
+	 */
+	public int depthTreeNodeForStack(TreeNode node) {
+		if (node == null) {
+			return 0;
+		}
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.offer(node);
+		int depth = 0;
+
+		while (!queue.isEmpty()) {
+			int size = queue.size();
+			for (int i = 0; i < size; i++) {
+				TreeNode current = queue.poll();
+				if (current.left != null) {
+					queue.offer(current.left);
+				}
+				if (current.right != null) {
+					queue.offer(current.right);
+				}
+			}
+			depth++;
+		}
+		return depth;
+	}
+
+
 	public static void main(String[] args) {
 		RecursionExample recursionExample = new RecursionExample();
 		recursionExample.hanoi(3, 'A', 'B', 'C');
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

@@ -38,6 +38,43 @@ public class DynamicPlanning {
 		return Math.min(dp[n], directCostBjToSH);
 	}
 
+	/**
+	 * 斐波那契数
+	 * @param n
+	 * @return
+	 */
+	public int flb(int n) {
+		if (n <= 1) {
+			return n;
+		}
+
+		int[] dp = new int[n + 1];
+		dp[0] = 0;
+		dp[1] = 1;
+
+		for (int i = 2; i <= n; i++) {
+			dp[i] = dp[i - 1] + dp[i - 2];
+		}
+
+		return dp[n];
+	}
+
+	public int climbStairs(int n) {
+		if (n <= 1) {
+			return 1;
+		}
+		// 存放每个台阶的走法
+		int[] dp = new int[n + 1];
+		dp[0] = 1;
+		dp[1] = 1;
+
+		for (int i = 2; i <= n; i++) {
+			dp[i] = dp[i - 1] + dp[i - 2];
+		}
+		return dp[n];
+
+	}
+
 
 	public static void main(String[] args) {
 		// 北京到苏州100元，苏州到上海50元
@@ -45,5 +82,10 @@ public class DynamicPlanning {
 		int directCostBJToSH = 200;
 		DynamicPlanning dynamicPlanning = new DynamicPlanning();
 		System.out.println(dynamicPlanning.minCostToShanghai(cost, directCostBJToSH));
+
+		System.out.println("=========斐波那契数========");
+		System.out.println(dynamicPlanning.flb(3));
+		System.out.println("=========爬楼梯=======");
+		System.out.println(dynamicPlanning.climbStairs(3));
 	}
 }
