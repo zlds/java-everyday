@@ -3,7 +3,7 @@ package org.example.leetcode;
 /**
  * @author: hanchaowei
  * @date 2023/9/8
- * @description: 判断两个数字是否相等
+ * @description: 判断两个数字是否相邻
  */
 
 public class AreAdjacent {
@@ -27,5 +27,11 @@ public class AreAdjacent {
 		}
 
 		return Math.abs(i1 - i2) == 1;
+	}
+
+	public static void main(String[] args) {
+		int[] list = {1, 2, 3, 4, 5, 6, 7, 8};
+		AreAdjacent areAdjacent = new AreAdjacent();
+		System.out.println(areAdjacent.areAdjacent(list, 1, 2));
 	}
 }
