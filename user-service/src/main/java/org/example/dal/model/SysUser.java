@@ -1,5 +1,6 @@
 package org.example.dal.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -12,7 +13,7 @@ import java.util.Date;
  * @description:
  */
 
-@TableName(name = "sys_user")
+@TableName("sys_user")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
