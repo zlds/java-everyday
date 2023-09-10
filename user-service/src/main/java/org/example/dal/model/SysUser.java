@@ -3,7 +3,7 @@ package org.example.dal.model;
 import lombok.*;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Table;
+
 import java.util.Date;
 
 /**
@@ -12,7 +12,7 @@ import java.util.Date;
  * @description:
  */
 
-@Table(name = "sys_user")
+@TableName(name = "sys_user")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
