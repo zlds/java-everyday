@@ -56,7 +56,7 @@ public class IsValidateIP {
 			if (s.length() == 0 || s.length() > 4) {
 				return false;
 			}
-			// 没一位进行校验
+			// 每一位进行校验
 			for (char c : s.toCharArray()) {
 				boolean isDigit = Character.isDigit(c);
 				boolean isUpperCaseAF = c >= 'A' && c <= 'F';
