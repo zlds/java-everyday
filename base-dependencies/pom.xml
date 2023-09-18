@@ -42,6 +42,7 @@
         <xxl-job.version>2.3.1</xxl-job.version>
         <!-- 工具类 -->
         <modelmapper.version>2.3.3</modelmapper.version>
+        <guava.version>27.0-jre</guava.version>
 
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
@@ -157,6 +158,12 @@
                 <groupId>org.modelmapper</groupId>
                 <artifactId>modelmapper</artifactId>
                 <version>${modelmapper.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
 
         </dependencies>
