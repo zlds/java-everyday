@@ -17,7 +17,7 @@ public class AddStrings {
 			int x = i >= 0 ? num1.charAt(i) - '0' : 0;
 			int y = j >= 0 ? num2.charAt(j) - '0' : 0;
 			int sum = x + y + carry;
-			// 进位
+			// 进位。如果大于10，进位为1
 			carry = sum / 10;
 			// 余数
 			result.append(sum % 10);
