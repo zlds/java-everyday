@@ -1,4 +1,4 @@
-package org.example.gof.apapterpattern;
+package org.example.gof.adapterpattern;
 
 /**
  * @author: hanchaowei

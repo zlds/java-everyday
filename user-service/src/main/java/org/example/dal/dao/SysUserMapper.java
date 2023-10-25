@@ -1,7 +1,7 @@
 package org.example.dal.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.example.dal.model.SysUser;
-import tk.mybatis.mapper.common.BaseMapper;
 
 /**
  * @author: hanchaowei
