@@ -3,11 +3,17 @@ package org.example.leetcode.repetition;
 /**
  * @author: hanchaowei
  * @date 2024/1/2
- * @description: 两个链表的第一个公共节点
+ * @description:  两个链表的第一个公共节点
  */
 
 public class FindTowPublicListNode {
 
+	/**
+	 * 两个链表的第一个公共节点。
+	 * @param l1
+	 * @param l2
+	 * @return
+	 */
 	public ListNode f(ListNode l1, ListNode l2) {
 		ListNode p1 = l1;
 		ListNode p2 = l2;
@@ -22,6 +28,50 @@ public class FindTowPublicListNode {
 			p2 = nextP2;
 		}
 		return p1;
+	}
+
+	/**
+	 * 两个链表的第一个公共节点。
+	 * 缺点：需要两次遍历，时间复杂度为O(m+n)
+	 * @param l1
+	 * @param l2
+	 * @return
+	 */
+	public ListNode e(ListNode l1, ListNode l2) {
+		// 获取l1的长度
+		int l1Length = getLength(l1);
+		// 获取l2的长度
+		int l2Length = getLength(l2);
+		// 将第一个链表和第二个链表长度设置一致
+		while (l1Length > l2Length) {
+			// 将指针向前移动，跳过多余的节点
+			l1 = l1.next;
+			l1Length--;
+		}
+		while (l2Length > l1Length) {
+			// 将指针向前移动，跳过多余的节点
+			l2 = l2.next;
+			l2Length--;
+		}
+
+		// 两个链表同时遍历，如果遇到相同的节点，就是第一个公共节点
+		while (l1 != null && l2 != null) {
+			if (l1 == l2) {
+				return l1;
+			}
+			l1 = l1.next;
+			l2 = l2.next;
+		}
+		return null;
+	}
+
+	public int getLength(ListNode head) {
+		int i = 1;
+		while (head != null) {
+			head = head.next;
+			i++;
+		}
+		return i;
 	}
 
 	public static void main(String[] args) {
@@ -51,12 +101,12 @@ public class FindTowPublicListNode {
 			System.out.println(listNode.value);
 			listNode = listNode.next;
 		}
+
+		ListNode listNode1 = new FindTowPublicListNode().e(x1, y1);
+		while (listNode1 != null) {
+			System.out.println(listNode1.value);
+			listNode1 = listNode1.next;
+		}
 	}
-
-
-
-
-
-
 
 }
