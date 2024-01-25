@@ -10,7 +10,7 @@ public class IdlerSingleMode {
 	// 懒汉模式,用到时创建
 	private static  IdlerSingleMode instance = null;
 
-	public IdlerSingleMode() {
+	private IdlerSingleMode() {
 	}
 
 	public static IdlerSingleMode getInstance() {

@@ -11,7 +11,7 @@ public class DualCheckSingleMode {
 	// volatile关键字的作用是保证instance变量有序性，禁止指令重排序
 	private static volatile DualCheckSingleMode instance = null;
 
-	public DualCheckSingleMode() {
+	private DualCheckSingleMode() {
 	}
 
 
