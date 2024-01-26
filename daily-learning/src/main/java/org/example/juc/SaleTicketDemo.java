@@ -1,4 +1,4 @@
-package org.example.juc.synch;
+package org.example.juc;
 
 /**
  * @author: hanchaowei

@@ -1,4 +1,4 @@
-package org.example.juc.synch;
+package org.example.juc;
 
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
