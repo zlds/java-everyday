@@ -3,7 +3,7 @@ package org.example.juc.fairlock;
 /**
  * @author: hanchaowei
  * @date 2023/7/30
- * @description:
+ * @description: 公平锁
  */
 
 public class FairLockExample {
