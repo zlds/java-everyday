@@ -8,7 +8,7 @@ package org.example.thread;
  */
 
 public class ThreadStopExample {
-	// 终止标志位
+	// 终止标志位(terminated的意义在于防止第三方吞掉了InterruptedException，线程也能在 isTerminated 为 true 时优雅地退出)
 	private volatile boolean terminated = false;
 	private boolean started = false;
 
