@@ -28,6 +28,10 @@ public class ManualCreateArrayExample {
 		if (index < 0 || index > size) {
 			throw new IndexOutOfBoundsException("超出数组实际元素范围！");
 		}
+		// 如果实际元素达到数组容量上限，数组扩容
+		if (size >= array.length) {
+			resize();
+		}
 		// 从右向左循环(最后一位开始移动)，将元素逐个向右挪1位
 		for (int i = size -1; i >= index; i--) {
 			array[i+1] = array[i];
@@ -36,6 +40,38 @@ public class ManualCreateArrayExample {
 		array[index] = element;
 		size++;
 	}
+
+
+	/**
+	 * 数组扩容
+	 */
+	public void resize() {
+		int[] arrayNew = new int[array.length * 2];
+		// 从旧数组复制到新数组
+		System.arraycopy(array,0,arrayNew,0,array.length);
+		array = arrayNew;
+	}
+
+	/**
+	 * 删除元素
+	 * @param index
+	 * @return
+	 */
+	public int delete(int index) {
+		if (index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException("超出数组实际元素范围!");
+		}
+		// 被删除的元素
+		int deletedElement = array[index];
+		// 从左向右循环，将元素逐个向左挪1位
+		for (int i=index; i < size - 1; i++) {
+			array[i] = array[i+1];
+		}
+		size--;
+		return deletedElement;
+	}
+
+
 
 	public void output() {
 		for (int i = 0; i < size; i++) {
@@ -53,5 +89,9 @@ public class ManualCreateArrayExample {
 		manualCreateArrayExample.output();
 		manualCreateArrayExample.insert(6, 1);
 		manualCreateArrayExample.output();
+
+		// 删除测试
+		int delete = manualCreateArrayExample.delete(2);
+		System.out.println(delete);
 	}
 }
